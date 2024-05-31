@@ -45,7 +45,7 @@ signing.post('/signup',async(req:Request,res:Response)=>{
     
 })
 
-signing.post('/signin',(req:Request,res:Response)=>{
+signing.post('/signin',async(req:Request,res:Response)=>{
 
     const {email,password}=req.body;
     const tokenWithBearer=req.headers.authorization;
@@ -71,7 +71,7 @@ signing.post('/signin',(req:Request,res:Response)=>{
     }
 
     try {
-        const verifyUser=prisma.user.findFirst({
+        const verifyUser=await prisma.user.findFirst({
             where:{
                 email,
                 password
